@@ -1,0 +1,24 @@
+apiVersion: gcm.vmware.com/v1alpha1
+kind: ManagedCluster
+metadata:
+  name: tsm-gc1
+spec:
+  topology:
+    controlPlane:
+      count: 1
+      class: best-effort-xsmall
+      storageClass: localds1
+    workers:
+      count: 2
+      class: best-effort-large
+      storageClass: localds1
+  distribution:
+    version: v1.15.5+vmware.1-tkg.1.85123d8
+  settings:
+    network:
+      cni:
+        name: calico
+      services:
+        cidrBlocks: ["198.51.100.0/12"]
+      pods:
+        cidrBlocks: ["192.0.2.0/16"]
